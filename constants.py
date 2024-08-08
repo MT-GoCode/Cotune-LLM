@@ -30,3 +30,5 @@ GReaT_template = (
     "i_upTimes is {i_upTimes}, i_dtype is {i_dtype}, e_ch is {e_ch}, e_m is {e_m}, e_po is {e_po}, e_pl is {e_pl}, "
     "e_rn is {e_rn}, e_section is {e_section}, e_et is {e_et}, label is {label}, cillabel is {cillabel}, pro is {pro}"
 )
+
+RANDOM_SEED = 42

@@ -1,4 +1,5 @@
 import pandas as pd
+from constants import RANDOM_SEED
 
 class InputData():
 
@@ -7,5 +8,5 @@ class InputData():
         self.source = pd.read_csv(source.value)
 
     def subset(self, frac, random_state):
-        self.target = self.target.sample(frac = frac, random_state = random_state)
-        self.source = self.source.sample(frac = frac, random_state = random_state)
+        self.target = self.target.sample(frac = frac, random_state = RANDOM_SEED)
+        self.source = self.source.sample(frac = frac, random_state = RANDOM_SEED)
