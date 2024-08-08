@@ -1,3 +1,4 @@
 test/
 train/
 archive/
+__pycache__/
