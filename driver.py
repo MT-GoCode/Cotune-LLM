@@ -11,7 +11,7 @@ def generate_GReaT(input_data : InputData) -> list[str]:
 
 def main():
     data_container = InputData(Data.TEST_ADS, Data.TEST_FEEDS)
-    data_container.subset(0.1, 3)
+    # data_container.subset(0.1, 3)
     encodings = generate_GReaT(data_container)
     output = Output(encodings=encodings).save_to_dataset(test_size=0.2)
 
