@@ -7,6 +7,6 @@ class InputData():
         self.target = pd.read_csv(target.value)
         self.source = pd.read_csv(source.value)
 
-    def subset(self, frac, random_state):
+    def subset(self, frac):
         self.target = self.target.sample(frac = frac, random_state = RANDOM_SEED)
         self.source = self.source.sample(frac = frac, random_state = RANDOM_SEED)

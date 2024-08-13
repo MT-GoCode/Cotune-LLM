@@ -8,7 +8,7 @@ class Output:
     def __init__(self, encodings : list[str]):
         self.encodings = encodings
 
-    def save_to_txt(self, filename: str, limit : int) -> None: # Be sure to set a limit!
+    def save_to_txt(self, filename: str, limit : int = None) -> None: # Be sure to set a limit!
         limit = limit if limit else len(self.encodings)
         with open(filename, 'w') as file:
             for line in self.encodings[:limit]:
