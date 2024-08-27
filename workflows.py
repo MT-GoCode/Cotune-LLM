@@ -11,15 +11,22 @@ def generate_GReaT(input_data : InputData) -> list[str]:
     template_factory = Template_Factory(merged_df, select_columns=['user_id', 'age', 'gender'])
     return Encoder(merged_df).template_textual_encoding_df(template_factory.GReaT_Template)
 
-# def generate_GReaT_with_user_time_group(input_data : InputData) -> list[str]:
-#     people_time_groups = Combiner(input_data).group_time_and_id()
-#     return Encoder(people_time_groups).template_textual_encoding_dict(GReaT_template_time_user_grouping)
+def generate_GReaT_with_user_time_group(input_data : InputData) -> list[str]:
+    people_time_groups = Combiner(input_data).group_time_and_id()
+    return Encoder(people_time_groups).template_textual_encoding_dict(GReaT_template_time_user_grouping)
+
+def generate_quantize(input_data : InputData) -> list[str]:
+    merged_df = Combiner(input_data).naive_merge()
+    return Encoder(merged_df).quantize()
 
 def encode_workflow(combine_and_encode):
     data_container = InputData(Data.TEST_ADS, Data.TEST_FEEDS)
     data_container.subset(0.05)
-    encodings = combine_and_encode(data_container)
-    # output = Output(encodings=encodings).save_to_dataset(test_size = 0.2)
+    encodings, vocab_map = combine_and_encode(data_container)
+    import json
+    with open('vocab_map.json', 'w') as json_file:
+        json.dump(vocab_map, json_file, indent=4)
+    output = Output(encodings=encodings).save_to_dataset(test_size = 0.2)
     output = Output(encodings=encodings).save_to_txt(filename="throwaway_outputs/test_GReaT_dynamic.txt")
 
 def decode_workflow():
@@ -36,5 +43,5 @@ def decode_workflow():
     print(Decoder(ex).GReaT_auto_decode())
 
 if __name__ == "__main__":
-    # encode_workflow(generate_GReaT)
-    decode_workflow()
+    encode_workflow(generate_quantize)
+    # decode_workflow()

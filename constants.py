@@ -24,7 +24,8 @@ list_type_columns = {
     "u_newsCatDislike": [],
     "u_newsCatInterestsST": [],
     "u_click_ca2_news": [],
-    "i_entities": []
+    "i_entities": [],
+    "u_newsCatInterestsST":[]
 }
 
 
