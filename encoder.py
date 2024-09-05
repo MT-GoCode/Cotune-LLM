@@ -1,7 +1,7 @@
 import pandas as pd
 import functools
 from tqdm import tqdm
-from constants import list_type_columns
+from constants import list_type_columns, exclude_columns
 
 tqdm.pandas()
 
@@ -10,6 +10,7 @@ class Encoder:
 
     def __init__(self, merged_data : pd.DataFrame | list[dict]):
         self.merged_data = merged_data
+        self.merged_data.drop(columns = exclude_columns)
 
     def basic_format_df_row(self, row, template):
         formatted_row = {k: v for k, v in row.items() if pd.notna(v)}
@@ -31,51 +32,47 @@ class Encoder:
     def template_textual_encoding_dict(self, template) -> list[str]:
         return [self.basic_format_dict(d, template) for d in tqdm(self.merged_data, desc="Encoding dictionaries")]
 
-    def quantize(self) -> pd.Series:
-        vocab_dump = {}
-        vocab_map = {}
+    def quantize(self):
+        vocab_dump = []
 
         # Function to generate encoding for each row
         def encode_row(row):
-            encode_list = [col for col in list_type_columns if col in self.merged_data.columns]
 
-            # Initialize vocab_dump for each column if not already present
-            for col in encode_list:
-                if col not in vocab_dump:
-                    vocab_dump[col] = []
+            encoded_row_words = [str(row['user_id'])] # start with user id
 
-            list_type_encodings = []
+            row.drop('user_id')
+            row.drop('u_userId')
+
+            # STEP 1: QUANTIZE LIST-TYPE COLUMNS
+
+            # encode list is a list of list_type_columns that are included in this row.
+            encode_list = [col for col in list_type_columns if col in row.index]
+
+            
             for col in encode_list:
                 values = str(row[col]).split('^')  # Convert row[col] to a string before splitting
                 encodings = [f'{col}_{v}' for v in values]
-                list_type_encodings.append(' '.join(encodings))
-                
-                # Add each value to vocab_dump[col]
-                vocab_dump[col].extend(encodings)
+                encoded_row_words.extend(encodings)
+                vocab_dump.extend(encodings)
             
-            list_type_encodings_str = ' '.join(list_type_encodings)  # Combine all list-type encodings
 
-            # Process other columns
-            other_columns = self.merged_data.columns.difference(list_type_columns)
+            # STEP 2: QUANTIZE NON-LIST TYPE COLUMNS
+            other_columns = row.index.difference(list_type_columns)
             other_encodings = [f'{col}_{str(row[col])}' for col in other_columns]
-            for col, encoding in zip(other_columns, other_encodings):
-                if col not in vocab_dump:
-                    vocab_dump[col] = []
-                vocab_dump[col].append(encoding)
+            encoded_row_words.extend(other_encodings)
+            vocab_dump.extend(other_encodings)
 
-            # Combine all encodings
-            return list_type_encodings_str + ' ' + ' '.join(other_encodings)
-        
+            return ' '.join(encoded_row_words)
+
         # Apply the encoding function to each row of self.merged_data
+        # print(self.merged_data)
         encoded_series = self.merged_data.apply(encode_row, axis=1)
 
-        # Reduce vocab_dump[col] to unique values and create vocab_map[col]
-        for col, values in vocab_dump.items():
-            unique_values = list(set(values))
-            vocab_map[col] = {i: v for i, v in enumerate(unique_values)}
+        vocab_dump = list(set(vocab_dump))
+        vocab_dump = [str(i) for i in range(10)] + vocab_dump
 
-        # Return the encoded series
-        return encoded_series, vocab_map
+        # print(encoded_series)
+        return encoded_series, vocab_dump
 
 
 

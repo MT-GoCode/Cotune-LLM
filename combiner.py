@@ -54,8 +54,7 @@ class Combiner:
                 
                 final_rows.append(merged_row)
             
-            return final_rows
-                
+            return final_rows           
     
     @staticmethod
     def smart_collapser(df, columns_to_exclude = []):

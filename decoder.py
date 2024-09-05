@@ -7,3 +7,5 @@ class Decoder:
     def GReaT_auto_decode(self):
         return pd.DataFrame([{kv.split(" is ")[0]: kv.split(" is ")[1] for kv in s.split(", ")} for s in self.raw])
 
+    def quantize_decode(self):
+        pd.DataFrame([{kv.split("_")[0]: kv.split("_")[1] for kv in s.split(" ")} for s in self.raw])

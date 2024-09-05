@@ -27,7 +27,7 @@ def encode_workflow(combine_and_encode):
     with open('vocab_map.json', 'w') as json_file:
         json.dump(vocab_map, json_file, indent=4)
     output = Output(encodings=encodings).save_to_dataset(test_size = 0.2)
-    output = Output(encodings=encodings).save_to_txt(filename="throwaway_outputs/test_GReaT_dynamic.txt")
+    output = Output(encodings=encodings).save_to_txt(filename="throwaway_outputs/test_quantize.txt")
 
 def decode_workflow():
     ex = [

@@ -12,6 +12,10 @@ day_splits = {
     'night': [(20, 24), (0, 4)],
 }
 
+exclude_columns = [
+    'log_id'
+]
+
 list_type_columns = {
     "ad_click_list_v001": [],
     "ad_click_list_v002": [],
@@ -25,7 +29,8 @@ list_type_columns = {
     "u_newsCatInterestsST": [],
     "u_click_ca2_news": [],
     "i_entities": [],
-    "u_newsCatInterestsST":[]
+    "u_newsCatInterestsST_x":[],
+    "u_newsCatInterestsST_y":[]
 }
 
 
