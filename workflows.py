@@ -27,9 +27,10 @@ def encode_workflow(combine_and_encode):
     with open('vocab_map.json', 'w') as json_file:
         json.dump(vocab_map, json_file, indent=4)
     output = Output(encodings=encodings).save_to_dataset(test_size = 0.2)
-    output = Output(encodings=encodings).save_to_txt(filename="throwaway_outputs/test_quantize.txt")
+    output.save_to_disk('encoded_dataset')
+    #output = Output(encodings=encodings).save_to_txt(filename="throwaway_outputs/test_quantize.txt")
 
-def decode_workflow():
+def decode_workflow0():
     ex = [
         "user_id is 223611, age is 6, gender is 4",
         "user_id is 223611, age is 6, gender is 4",
@@ -41,7 +42,18 @@ def decode_workflow():
         "user_id is 195306, age is 5, gender is 2",
     ]
     print(Decoder(ex).GReaT_auto_decode())
+    
+def decode_workflow_quantized():
+    synth_file = "synth_data/conditional_generation05.txt"
+    with open(synth_file, 'r') as F:
+        ex = F.readlines()
+    decoded_data = Decoder(ex).quantize_decode()
+    print(decoded_data)
+    decoded_data.to_csv("synth_data/conditional_generation05_decoded.csv",index=False)
 
 if __name__ == "__main__":
-    encode_workflow(generate_quantize)
-    # decode_workflow()
+    encode = True
+    if encode:
+        encode_workflow(generate_quantize)
+    else:
+        decode_workflow_quantized()

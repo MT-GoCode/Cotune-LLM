@@ -3,3 +3,8 @@ train/
 archive/
 __pycache__/
 throwaway_outputs/
+checkpoints/*
+synth_data/*
+encoded_dataset/*
+nohup.out
+logs/*
