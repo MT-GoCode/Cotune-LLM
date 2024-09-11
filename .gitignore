@@ -1,5 +1,2 @@
-test/
-train/
-archive/
-__pycache__/
-throwaway_outputs/
+**/*cache*/
+**/*temp*/
