@@ -1,0 +1,13 @@
+pipeline: encode
+
+options:
+
+  ads_data_path: data/dataset/test/test_data_ads.csv
+
+  feeds_data_path: data/dataset/test/test_data_feeds.csv
+
+  subset: 0.1
+
+  combine: user-time # or "naive"
+
+  encoding: great # or "quantization" or "fakers-quantization"

@@ -1,0 +1,9 @@
+pipeline: decode
+
+options:
+
+  data_path: # FILL IN
+
+  serialized_tokenizer_path: # FILL IN
+
+  encoding: great # or "quantization" or "fakers-quantization"
