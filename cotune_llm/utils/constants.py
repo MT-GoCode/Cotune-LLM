@@ -1,20 +1,20 @@
 from enum import Enum
 
+
 class Data(Enum):
     TEST_ADS = "./test/test_data_ads.csv"
     TEST_FEEDS = "./test/test_data_feeds.csv"
     TRAIN_ADS = "./train/train_data_ads.csv"
     TRAIN_FEEDS = "./train/train_data_feeds.csv"
 
-day_splits = { 
-    'morning': [(4, 12)], 
-    'afternoon': [(12, 20)],
-    'night': [(20, 24), (0, 4)],
+
+day_splits = {
+    "morning": [(4, 12)],
+    "afternoon": [(12, 20)],
+    "night": [(20, 24), (0, 4)],
 }
 
-exclude_columns = [
-    'log_id'
-]
+exclude_columns = ["log_id"]
 
 list_type_columns = {
     "ad_click_list_v001": [],
@@ -29,8 +29,8 @@ list_type_columns = {
     "u_newsCatInterestsST": [],
     "u_click_ca2_news": [],
     "i_entities": [],
-    "u_newsCatInterestsST_x":[],
-    "u_newsCatInterestsST_y":[]
+    "u_newsCatInterestsST_x": [],
+    "u_newsCatInterestsST_y": [],
 }
 
 
@@ -61,7 +61,6 @@ GReaT_template_naive = (
 
 GReaT_template_time_user_grouping = {
     "basic": "on {day} at time {time_category}, ",
-
     "target_template": "user_id is {user_id}, age is {age}, gender is {gender}, "
     "residence is {residence}, city is {city}, city_rank is {city_rank}, series_dev is {series_dev}, "
     "series_group is {series_group}, emui_dev is {emui_dev}, device_name is {device_name}, "
@@ -72,19 +71,15 @@ GReaT_template_time_user_grouping = {
     "app_score is {app_score}, ad_click_list_v001 is {ad_click_list_v001}, ad_click_list_v002 is {ad_click_list_v002}, "
     "ad_click_list_v003 is {ad_click_list_v003}, ad_close_list_v001 is {ad_close_list_v001}, "
     "ad_close_list_v002 is {ad_close_list_v002}, ad_close_list_v003 is {ad_close_list_v003}, pt_d is {pt_d}, ",
-    
-    "source_template": 
-    "u_userId is {u_userId}, u_phonePrice is {u_phonePrice}, u_browserLifeCycle is {u_browserLifeCycle}, "
+    "source_template": "u_userId is {u_userId}, u_phonePrice is {u_phonePrice}, u_browserLifeCycle is {u_browserLifeCycle}, "
     "u_newsCatInterestsST is {u_newsCatInterestsST}, u_refreshTimes is {u_refreshTimes}, u_feedLifeCycle is {u_feedLifeCycle}, "
     "u_browserMode is {u_browserMode}, u_newsCatInterests is {u_newsCatInterests}, u_newsCatDislike is {u_newsCatDislike}, "
     "u_click_ca2_news is {u_click_ca2_news}, i_docId is {i_docId}, i_s_sourceId is {i_s_sourceId}, "
     "i_regionEntity is {i_regionEntity}, i_cat is {i_cat}, i_dislikeTimes is {i_dislikeTimes}, "
     "i_upTimes is {i_upTimes}, i_dtype is {i_dtype}, e_ch is {e_ch}, e_m is {e_m}, e_po is {e_po}, e_pl is {e_pl}, "
-    "e_rn is {e_rn}, e_section is {e_section}, e_et is {e_et}, label is {label}, cillabel is {cillabel}, pro is {pro}"
+    "e_rn is {e_rn}, e_section is {e_section}, e_et is {e_et}, label is {label}, cillabel is {cillabel}, pro is {pro}",
 }
 
-    
-    
 
 RANDOM_SEED = 42
 

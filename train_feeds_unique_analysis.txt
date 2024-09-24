@@ -1,0 +1,29 @@
+total train_feeds length: 3227732
+u_userId unique: 180123
+u_phonePrice unique: 7
+u_browserLifeCycle unique: 8
+u_browserMode unique: 8
+u_feedLifeCycle unique: 8
+u_refreshTimes unique: 10
+u_newsCatInterests LIST TYPE unique: 215
+u_newsCatDislike LIST TYPE unique: 173
+u_newsCatInterestsST LIST TYPE unique: 212
+u_click_ca2_news LIST TYPE unique: 218
+i_docId unique: 98600
+i_s_sourceId unique: 4040
+i_regionEntity unique: 378
+i_cat unique: 208
+i_entities LIST TYPE unique: 393645
+i_dislikeTimes unique: 10
+i_upTimes unique: 10
+i_dtype unique: 5
+e_ch unique: 19
+e_m unique: 274
+e_po unique: 27
+e_pl unique: 3113
+e_rn unique: 99
+e_section unique: 2
+e_et unique: 3663
+label unique: 2
+cillabel unique: 2
+pro unique: 85

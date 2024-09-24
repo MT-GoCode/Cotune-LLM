@@ -1,0 +1,35 @@
+total test_ads length: 976058
+log_id unique: 976058
+user_id unique: 28771
+age unique: 8
+gender unique: 3
+residence unique: 36
+city unique: 338
+city_rank unique: 4
+series_dev unique: 23
+series_group unique: 7
+emui_dev unique: 25
+device_name unique: 240
+device_size unique: 767
+net_type unique: 6
+task_id unique: 6039
+adv_id unique: 6887
+creat_type_cd unique: 9
+adv_prim_id unique: 440
+inter_type_cd unique: 4
+slot_id unique: 58
+site_id unique: 1
+spread_app_id unique: 99
+hispace_app_tags LIST TYPE unique: 41
+app_second_class unique: 20
+app_score unique: 3
+ad_click_list_v001 LIST TYPE unique: 12946
+ad_click_list_v002 LIST TYPE unique: 928
+ad_click_list_v003 LIST TYPE unique: 227
+ad_close_list_v001 LIST TYPE unique: 2015
+ad_close_list_v002 LIST TYPE unique: 469
+ad_close_list_v003 LIST TYPE unique: 110
+pt_d unique: 1041
+u_newsCatInterestsST LIST TYPE unique: 203
+u_refreshTimes unique: 10
+u_feedLifeCycle unique: 8
