@@ -1,6 +1,5 @@
 from transformers import PreTrainedTokenizer
 
-
 class CustomTokenizer(PreTrainedTokenizer):
     def __init__(self, vocab, **kwargs):
         self.vocab = vocab

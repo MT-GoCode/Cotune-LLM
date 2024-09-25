@@ -1,6 +1,6 @@
 import yaml
 from prefect import context, task
-
+import os
 from cotune_llm.pipelines import encode
 
 
@@ -13,5 +13,9 @@ def initialize_context(config_file: str) -> None:
         "encode": encode.run,
     }
 
+    results_dir_ = config['data_dir'] + f"results/{config['pipeline']}"
+    os.makedirs(results_dir_, exist_ok=True)
+
+    context.results_dir = results_dir_
     context.pipeline = pipeline_map[config["pipeline"]]
     context.options = config["options"]

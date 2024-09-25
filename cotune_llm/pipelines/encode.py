@@ -1,21 +1,30 @@
-from cotune_llm.components.encoder import Encoder
+from cotune_llm.components.encode.tasks import Encoder
 from cotune_llm.components.output import Output
 from cotune_llm.utils.constants import GReaT_template_time_user_grouping, Data
 from cotune_llm.components.templates import Template_Factory
-from cotune_llm.components import ingestion, combine
-from prefect import flow
+from cotune_llm.components import ingestion, combine, encode
+from prefect import flow, context
+
 
 @flow
 def run():
     target, source = ingestion.run()
-    merged_df = combine.naive_merge(target, source)
-    return Encoder(merged_df).quantize()
 
-    encodings, vocab_map = combine_and_encode(data_container)
-    import json
+    combine_methods = {
+        'user-time' : combine.group_time_and_id,
+        'naive' : combine.naive_merge
+    }
+    merged_df = combine_methods[context.options['combine']](target, source)
+    
+    if context.options['encode'] == 'quantize':
+        encodings, vocab_map = encode.quantize(merged_df)
 
-    with open("vocab_map.json", "w") as json_file:
-        json.dump(vocab_map, json_file, indent=4)
+
+    elif context.options['encode'] == 'template':   
+        encodings = encode.template_textual_encoding_df(merged_df)
+
+    
+    
     output = Output(encodings=encodings).save_to_dataset(test_size=0.2)
     output = Output(encodings=encodings).save_to_txt(
         filename="throwaway_outputs/test_quantize.txt"

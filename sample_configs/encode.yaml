@@ -1,5 +1,7 @@
 pipeline: encode
 
+data_dir: 'data'
+
 options:
 
   ads_data_path: data/dataset/test/test_data_ads.csv
